@@ -4,14 +4,13 @@ import { mount } from 'enzyme';
 import Hello from '../Hello';
 
 
-describe('Hello component should have one div with text "Hello"', () => {
-
+describe('Hello component', () => {
   const wrapper = mount(
-    <Hello />
+    <Hello />,
   );
 
-  it(`"onOpenedStateChange" should be called once`, () => {
-   expect(wrapper.find('div')).toHaveLength(1);
-   expect(wrapper.find('div').text()).toEqual('Hello');
+  it('Should have one div with text "Hello"', () => {
+    expect(wrapper.find('div')).toHaveLength(1);
+    expect(wrapper.find('div').text()).toEqual('Hello');
   });
 });
