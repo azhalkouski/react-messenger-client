@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import './styles.css';
 
-export default ({ children }) => (
-  <div>
-    { children }
-  </div>
-)
+export default class App extends PureComponent {
+  static propTypes = {
+    children: PropTypes.any,
+  }
+
+  static defaultProps = {
+    children: null,
+  }
+
+  render() {
+    const { children } = this.props;
+
+    return (
+      <div>
+        { children }
+      </div>
+    );
+  }
+}
