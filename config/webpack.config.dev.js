@@ -19,7 +19,6 @@ module.exports = merge(common, {
   devServer: {
     contentBase: './public',
     hot: true,
-    // Enable gzip compression of generated files.
-    compress: true,
+    historyApiFallback: true,
   },
 });

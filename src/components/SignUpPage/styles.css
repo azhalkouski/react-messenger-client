@@ -1,0 +1,84 @@
+.sign-up-page {
+  --top-background-height: 25%;
+
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: rgba(0,0,0,0.03);
+}
+
+.sign-up-page__top-background {
+  height: var(--top-background-height);
+  width: 100%;
+  background: var(--main-color);
+}
+
+.sign-up-page__card {
+  position: absolute;
+  top: calc(var(--top-background-height) - 77px);
+  width: 500px;
+  max-width: 90%;
+  max-height: 90%;
+  background: #FFFFFF;
+  box-shadow: -1px 0 0 0 rgba(96,126,152,0.10), 1px 0 0 0 rgba(96,126,152,0.10), 0 1px 1px 0 rgba(96,126,152,0.20);
+}
+
+.sign-up-page__card-header {
+  padding: 24px;
+}
+
+.sign-up-page__card-body {
+  padding: 10px 24px 24px;
+}
+
+@media screen and (max-height: 320px) and (orientation: landscape) {
+  .sign-up-page__card-header {
+    padding: 13px 24px 0;
+  }
+}
+
+@media screen and (min-height: 321px) and (max-height: 360px) and (orientation: landscape) {
+  .sign-up-page__card-header {
+    padding: 24px 24px 0;
+  }
+
+  .sign-up-page__card-body {
+    padding: 0 24px 4px;
+  }
+}
+
+/* Iphone 8/X */
+@media screen and (max-height: 375px) and (orientation: landscape) {
+  .sign-up-page__card-body {
+    padding: 0 24px 4px;
+  }
+}
+
+.sign-up-page__card-title {
+  font-size: 24px;
+  color: rgba(0,0,0,0.87);
+  font-weight: 500;
+}
+
+.sign-up-page__card-description {
+  margin-top: 16px;
+  font-size: 14px;
+  color: rgba(0,0,0,0.54);
+  letter-spacing: 0.5px;
+}
+
+.sign-up-page__input {
+  width: 100% !important;
+}
+
+.sign-up-page__input:last-of-type {
+  margin-top: 10px !important;
+}
+
+.sign-up-page__buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px;
+}
