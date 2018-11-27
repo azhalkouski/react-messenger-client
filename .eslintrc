@@ -8,6 +8,7 @@
     "plugins": ["jest"],
     "rules": {
       "jsx-a11y/no-static-element-interactions": 0,
+      "jsx-a11y/alt-text": 0,
       "no-useless-escape": 0,
       "react/forbid-prop-types": 0,
       "react/no-array-index-key": 0,

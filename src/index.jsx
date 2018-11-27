@@ -9,6 +9,7 @@ import './main.css';
 import App from './components/App';
 import Hello from './components/Hello';
 import SignUpPage from './components/SignUpPage';
+import MessengerPage from './components/MessengerPage';
 
 const getMainColor = () =>
   getComputedStyle(document.documentElement).getPropertyValue('--main-color');
@@ -30,6 +31,7 @@ render((
       <App>
         <Route exact path="/" component={Hello} />
         <Route path="/signup" component={SignUpPage} />
+        <Route path="/messenger" component={MessengerPage} />
       </App>
     </BrowserRouter>
   </MuiThemeProvider>

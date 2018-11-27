@@ -2,12 +2,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: .87;
+}
+
+.logo--light {
+  opacity: .24;
+}
+
+.logo--dark {
+  opacity: .87;
 }
 
 .logo__icon {
   width: 24px;
   height: 24px;
-  background: url('../../assets/img/icons/message.svg');
+  background: url('../../assets/img/icons/message-dark.svg');
+}
+
+.logo--light .logo__icon {
+  background: url('../../assets/img/icons/message-light.svg');
+}
+
+.logo--dark .logo__icon {
+  background: url('../../assets/img/icons/message-dark.svg');
 }
 
 .logo__text {
@@ -15,4 +32,12 @@
   font-weight: bold;
   margin-left: 10px;
   color: rgba(0,0,0,0.87);
+}
+
+.logo--light .logo__text {
+  color: #FFFFFF;
+}
+
+.logo--dark .logo__text {
+  color: #000000;
 }

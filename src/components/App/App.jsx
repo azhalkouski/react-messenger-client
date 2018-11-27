@@ -1,25 +1,17 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import './styles.css';
 
-export default class App extends PureComponent {
-  static propTypes = {
-    children: PropTypes.any,
-  }
+const App = ({ children }) => (
+  <div className="container">
+    <CssBaseline />
+    { children }
+  </div>
+);
 
-  static defaultProps = {
-    children: null,
-  }
+App.propTypes = {
+  children: PropTypes.any.isRequired,
+};
 
-  render() {
-    const { children } = this.props;
-
-    return (
-      <div className="container">
-        <CssBaseline />
-        { children }
-      </div>
-    );
-  }
-}
+export default App;
