@@ -1,5 +1,6 @@
 /** CSS Custom Properties aren't supported by IE11 (unfortunately) */
 /** In case IE11 support is required USE preprocessors like PostCSS */
 :root {
-  --main-color:#4dd0e1;
+  --main-color:#373e50;
+  --main-color-dark:#272d3a;
 }

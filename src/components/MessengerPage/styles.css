@@ -9,7 +9,7 @@
   overflow-y: auto;
   height: 100%;
   width: 300px;
-  background: #272d3a;
+  background: var(--main-color-dark);
   color: #fff;
 }
 
@@ -48,7 +48,7 @@
 
 .sidebar__user-chats {
   flex: 1;
-  background: #373e50;
+  background: var(--main-color);
 }
 
 .user-chats__search {
