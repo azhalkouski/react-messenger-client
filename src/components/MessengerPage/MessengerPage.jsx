@@ -20,6 +20,17 @@ const MessengerPage = () => (
         <div className="user-chats__chats-list">
           <div className="chats-list__chat-item">
             <div className="chat-item__user">
+              <img className="user__image" src="https://randomuser.me/api/portraits/women/68.jpg" />
+              <div className="user__status" />
+            </div>
+            <div className="chat-item__message-preview">
+              <span className="message-preview__user">Rosa Green</span>
+              <span className="message-preview__last-message">Sure</span>
+            </div>
+            <span className="chat-item__last-message-date">9:08 PM</span>
+          </div>
+          <div className="chats-list__chat-item">
+            <div className="chat-item__user">
               <img className="user__image" src="https://randomuser.me/api/portraits/men/83.jpg" />
               <div className="user__status" />
             </div>
@@ -40,17 +51,50 @@ const MessengerPage = () => (
           <span className="info__status">Online</span>
         </div>
       </div>
-      <div className="chat__messages">
-        <div className="message message_type_outgoing">
-          <div className="message__message-body">
-            <div className="message-body__content message-body_variant-outgoing">Some text</div>
-            <span className="message__time">8:48 PM</span>
+      <div className="chat-messages">
+        <div className="chat-messages__message">
+          <img className="message__user-photo" src="https://randomuser.me/api/portraits/women/68.jpg" />
+          <div className="message__content">
+            <div className="message__content-header">
+              <span className="message__sender">Rosa Green</span>
+              <span className="message__time">9:08 PM</span>
+            </div>
+            <span className="message__content-body">Sure.</span>
           </div>
         </div>
-        <div className="message message_type_incoming">
-          <div className="message__message-body">
-            <div className="message-body__content message-body_variant-incoming">Some text</div>
-            <span className="message__time">8:47 PM</span>
+        <div className="chat-messages__message">
+          <img className="message__user-photo" src="https://randomuser.me/api/portraits/men/85.jpg" />
+          <div className="message__content">
+            <div className="message__content-header">
+              <span className="message__sender">Jionni Key</span>
+              <span className="message__time">9:07 PM</span>
+            </div>
+            <span className="message__content-body">Fine. I was thinking about your suggest. What if I take the book for a few weeks?</span>
+          </div>
+        </div>
+        <div className="chat-messages__message">
+          <img className="message__user-photo" src="https://randomuser.me/api/portraits/women/68.jpg" />
+          <div className="message__content">
+            <div className="message__content-header">
+              <span className="message__sender">Rosa Green</span>
+              <span className="message__time">8:52 PM</span>
+            </div>
+            <span className="message__content-body">Hey, going well and how are you?</span>
+          </div>
+        </div>
+        <div className="chat-messages__message">
+          <div className="message__content">
+            <span className="message__content-body">How is it going?</span>
+          </div>
+        </div>
+        <div className="chat-messages__message">
+          <img className="message__user-photo" src="https://randomuser.me/api/portraits/men/85.jpg" />
+          <div className="message__content">
+            <div className="message__content-header">
+              <span className="message__sender">Jionni Key</span>
+              <span className="message__time">8:47 PM</span>
+            </div>
+            <span className="message__content-body">Hi</span>
           </div>
         </div>
       </div>
