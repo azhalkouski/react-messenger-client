@@ -18,6 +18,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: resolve(__dirname, '..', 'build'),
+    publicPath: '/',
   },
 
   resolve: {
@@ -86,6 +87,7 @@ module.exports = {
       inject: true,
       template: 'public/index.html',
       title: 'Messenger',
+      favicon: 'public/favicon.ico',
     }),
   ],
 };
