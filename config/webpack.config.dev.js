@@ -88,11 +88,12 @@ module.exports = {
       inject: true,
       template: 'public/index.html',
       title: 'Messenger',
+      favicon: 'public/favicon.ico',
     }),
   ],
 
   devServer: {
-    contentBase: './public',
+    contentBase: '/',
     hot: true,
     historyApiFallback: true,
   },
