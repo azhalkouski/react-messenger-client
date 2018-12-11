@@ -96,5 +96,8 @@ module.exports = {
     contentBase: '/',
     hot: true,
     historyApiFallback: true,
+    proxy: {
+      '/api': 'http://localhost:8080',
+    },
   },
 };
