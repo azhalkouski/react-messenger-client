@@ -9,6 +9,8 @@ const withVal = fn => e => fn(e.target.value);
 
 class SignUpPage extends PureComponent {
   static propTypes = {
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     onEmailChange: PropTypes.func.isRequired,
@@ -18,6 +20,8 @@ class SignUpPage extends PureComponent {
 
   render() {
     const {
+      title,
+      description,
       email,
       password,
       onEmailChange,
@@ -33,10 +37,8 @@ class SignUpPage extends PureComponent {
             <Logo />
           </div>
           <div className="sign-up-page__card-body">
-            <h1 className="sign-up-page__card-title">Sign up</h1>
-            <p className="sign-up-page__card-description">
-              Create an account or login into the existing one.
-            </p>
+            <h1 className="sign-up-page__card-title">{title}</h1>
+            <p className="sign-up-page__card-description">{description}</p>
             <div className="sign-up-page__inputs">
               <TextField
                 className="sign-up-page__input"

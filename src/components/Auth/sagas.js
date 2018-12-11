@@ -1,10 +1,14 @@
 import { takeEvery, all, put } from 'redux-saga/effects';
 import {
   SIGN_UP,
+  SIGN_IN,
 
   signUpLoading,
   signUpSuccess,
   signUpError,
+  signInLoading,
+  signInSuccess,
+  signInError,
 } from './actions';
 
 function* signUpSaga({ payload }) {
@@ -14,7 +18,7 @@ function* signUpSaga({ payload }) {
       method: 'POST',
       body: JSON.stringify({
         email: payload.email,
-        password: payload.email,
+        password: payload.password,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -27,8 +31,29 @@ function* signUpSaga({ payload }) {
   }
 }
 
+function* signInSaga({ payload }) {
+  yield put(signInLoading());
+  try {
+    const user = yield fetch('/api/v1/auth', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: payload.email,
+        password: payload.password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json());
+    yield put(signInSuccess(user));
+  } catch (e) {
+    yield put(signInError(e));
+  }
+}
+
 export default function () {
   return all([
     takeEvery(SIGN_UP, signUpSaga),
+    takeEvery(SIGN_IN, signInSaga),
   ]);
 }
