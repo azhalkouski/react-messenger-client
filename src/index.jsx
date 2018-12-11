@@ -1,17 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { createLogger } from 'redux-logger';
 import Router from 'react-router-dom/Router';
 import Route from 'react-router-dom/Route';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import '@babel/polyfill';
 import history from './utils/history';
-import reducers from './reducers';
+import rootReducer from './rootReducer';
+import rootSaga from './rootSaga';
 import './main.css';
 
 import App from './components/App';
-import SignUpPage from './components/SignUpPage';
+import SignUpPage from './components/Auth/SignUpPage';
 import MessengerPage from './components/MessengerPage';
 
 const getMainColor = () =>
@@ -28,7 +31,13 @@ const theme = createMuiTheme({
   },
 });
 
-const store = createStore(reducers);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(
+  rootReducer,
+  applyMiddleware(createLogger(), sagaMiddleware),
+);
+
+sagaMiddleware.run(rootSaga);
 
 render((
   <MuiThemeProvider theme={theme}>
