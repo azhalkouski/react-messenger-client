@@ -2,43 +2,21 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { signUp } from '../actions';
-import SignUpPageComponent from './Component';
+import Form from '../Form';
 
-class SignUpPageContainer extends PureComponent {
+class SignUpPage extends PureComponent {
   static propTypes = {
     handleSignUp: PropTypes.func.isRequired,
   }
 
-  state = {
-    email: '',
-    password: '',
-  }
-
-  handleEmailChange = (email) => {
-    this.setState({ email });
-  }
-
-  handlePasswordChange = (password) => {
-    this.setState({ password });
-  }
-
-  handleSubmit = () => {
-    const { email, password } = this.state;
+  render() {
     const { handleSignUp } = this.props;
 
-    handleSignUp(email, password);
-  }
-
-  render() {
-    const { email, password } = this.state;
-
     return (
-      <SignUpPageComponent
-        email={email}
-        password={password}
-        onEmailChange={this.handleEmailChange}
-        onPasswordChange={this.handlePasswordChange}
-        onSubmit={this.handleSubmit}
+      <Form
+        title="Sign up"
+        description="Please create an account or login into the existing one."
+        onSubmit={handleSignUp}
       />
     );
   }
@@ -48,4 +26,4 @@ const mapDispatchToProps = {
   handleSignUp: signUp,
 };
 
-export default connect(null, mapDispatchToProps)(SignUpPageContainer);
+export default connect(null, mapDispatchToProps)(SignUpPage);

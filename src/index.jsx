@@ -15,6 +15,7 @@ import './main.css';
 
 import App from './components/App';
 import SignUpPage from './components/Auth/SignUpPage';
+import SignInPage from './components/Auth/SignInPage';
 import MessengerPage from './components/MessengerPage';
 
 const getMainColor = () =>
@@ -46,6 +47,7 @@ render((
         <App>
           <Route exact path="/" component={MessengerPage} />
           <Route path="/signup" component={SignUpPage} />
+          <Route path="/signin" component={SignInPage} />
         </App>
       </Router>
     </Provider>
