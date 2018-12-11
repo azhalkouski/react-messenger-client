@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
 import Logo from '../Logo';
-import authService from '../../utils/AuthService';
+// import authService from '../../utils/AuthService';
 import './styles.css';
 
 class MessengerPage extends PureComponent {
-  componentDidMount() {
-    if (!authService.loggedIn()) {
-      authService.login();
-    }
-  }
+  // componentDidMount() {
+  //   if (!authService.loggedIn()) {
+  //     authService.login();
+  //   }
+  // }
 
   render() {
     return (
