@@ -1,18 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import createSagaMiddleware from 'redux-saga';
-import { createLogger } from 'redux-logger';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { hot } from 'react-hot-loader';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ConnectedRouter } from 'connected-react-router';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
-import createRootReducer from '../../rootReducer';
-import rootSaga from '../../rootSaga';
 import history from '../../utils/history';
+import store from '../../configureStore';
 import './styles.css';
 
 import SignUpPage from '../Auth/SignUpPage';
@@ -32,16 +27,6 @@ const theme = createMuiTheme({
     useNextVariants: true,
   },
 });
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(
-  createRootReducer(history),
-  composeWithDevTools(
-    applyMiddleware(createLogger(), sagaMiddleware),
-  ),
-);
-
-sagaMiddleware.run(rootSaga);
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
