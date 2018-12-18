@@ -1,16 +1,17 @@
 import {
-  SIGN_UP,
-  SIGN_IN,
+  SIGN_IN_SUCCESS,
+  SIGN_UP_SUCCESS,
 } from './actions';
 
 const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SIGN_IN:
-    case SIGN_UP:
+    case SIGN_IN_SUCCESS:
+    case SIGN_UP_SUCCESS:
       return {
-        email: action.payload.email,
+        ...state,
+        user: action.payload,
       };
     default:
       return state;

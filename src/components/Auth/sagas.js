@@ -1,4 +1,5 @@
 import { takeEvery, all, put } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 import {
   SIGN_UP,
   SIGN_IN,
@@ -46,6 +47,7 @@ function* signInSaga({ payload }) {
     })
       .then(response => response.json());
     yield put(signInSuccess(user));
+    yield put(push('/'));
   } catch (e) {
     yield put(signInError(e));
   }
