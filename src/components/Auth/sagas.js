@@ -27,6 +27,7 @@ function* signUpSaga({ payload }) {
     })
       .then(response => response.json());
     yield put(signUpSuccess(user));
+    yield put(push('/'));
   } catch (e) {
     yield put(signUpError(e));
   }

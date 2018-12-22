@@ -35,7 +35,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getChats: fetchChats,
+  fetchChatsData: fetchChats,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessengerContainer);
