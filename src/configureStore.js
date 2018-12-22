@@ -12,22 +12,24 @@ const persistedState = loadState();
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-  createRootReducer(history),
-  persistedState,
-  composeWithDevTools(
-    applyMiddleware(
-      createLogger(),
-      routerMiddleware(history),
-      sagaMiddleware,
+export default () => {
+  const store = createStore(
+    createRootReducer(history),
+    persistedState,
+    composeWithDevTools(
+      applyMiddleware(
+        createLogger(),
+        routerMiddleware(history),
+        sagaMiddleware,
+      ),
     ),
-  ),
-);
+  );
 
-store.subscribe(() => {
-  saveState(store.getState());
-});
+  store.subscribe(() => {
+    saveState(store.getState());
+  });
 
-sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga);
 
-export default store;
+  return store;
+};

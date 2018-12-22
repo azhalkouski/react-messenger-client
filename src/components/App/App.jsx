@@ -7,7 +7,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 import history from '../../utils/history';
-import store from '../../configureStore';
+import configureStore from '../../configureStore';
 import './styles.css';
 
 import SignUpPage from '../Auth/SignUpPage';
@@ -27,6 +27,8 @@ const theme = createMuiTheme({
     useNextVariants: true,
   },
 });
+
+const store = configureStore();
 
 const App = () => (
   <MuiThemeProvider theme={theme}>

@@ -1,4 +1,4 @@
-import { takeEvery, all, put } from 'redux-saga/effects';
+import { takeLatest, all, put } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import {
   SIGN_UP,
@@ -27,6 +27,7 @@ function* signUpSaga({ payload }) {
     })
       .then(response => response.json());
     yield put(signUpSuccess(user));
+    yield put(push('/'));
   } catch (e) {
     yield put(signUpError(e));
   }
@@ -55,7 +56,7 @@ function* signInSaga({ payload }) {
 
 export default function () {
   return all([
-    takeEvery(SIGN_UP, signUpSaga),
-    takeEvery(SIGN_IN, signInSaga),
+    takeLatest(SIGN_UP, signUpSaga),
+    takeLatest(SIGN_IN, signInSaga),
   ]);
 }
