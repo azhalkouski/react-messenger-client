@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import FormComponent from './Component';
+import FormView from './FormView';
 
-class Form extends PureComponent {
+class FormContainer extends PureComponent {
   static propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -34,7 +34,7 @@ class Form extends PureComponent {
     const { title, description } = this.props;
 
     return (
-      <FormComponent
+      <FormView
         title={title}
         description={description}
         email={email}
@@ -47,4 +47,4 @@ class Form extends PureComponent {
   }
 }
 
-export default Form;
+export default FormContainer;
