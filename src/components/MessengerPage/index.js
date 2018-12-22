@@ -1,3 +1,3 @@
-import Container from './Container';
+import MessengerContainer from './MessengerContainer';
 
-export default Container;
+export default MessengerContainer;

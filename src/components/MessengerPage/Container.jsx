@@ -1,11 +1,41 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Component from './Component';
+import MessengerView from './Component';
+import { userType, chatType } from './propTypes';
+import { fetchChats } from './actions';
+// import authService from '../../utils/AuthService';
 
-class Messenger extends PureComponent {
+class MessengerContainer extends PureComponent {
+  static propTypes = {
+    user: userType.isRequired,
+    chats: PropTypes.arrayOf(chatType).isRequired,
+    fetchChatsData: PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    // if (!authService.loggedIn()) {
+    //     authService.login();
+    //   }
+    const { fetchChatsData } = this.props;
+
+    fetchChatsData();
+  }
+
   render() {
-    return <Component />;
+    const { user, chats } = this.props;
+
+    return <MessengerView user={user} chats={chats} />;
   }
 }
 
-export default connect(null)(Messenger);
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  chats: state.messenger.chats,
+});
+
+const mapDispatchToProps = {
+  getChats: fetchChats,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessengerContainer);
