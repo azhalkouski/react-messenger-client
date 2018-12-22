@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import MessengerView from './Component';
+import queryString from 'query-string';
+import MessengerView from './MessengerView';
 import { userType, chatType } from './propTypes';
 import { fetchChats } from './actions';
 import Chat from '../Chat';
@@ -11,7 +12,12 @@ class MessengerContainer extends PureComponent {
   static propTypes = {
     user: userType.isRequired,
     chats: PropTypes.arrayOf(chatType).isRequired,
+    activeChatId: PropTypes.string,
     fetchChatsData: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    activeChatId: null,
   }
 
   componentDidMount() {
@@ -24,11 +30,13 @@ class MessengerContainer extends PureComponent {
   }
 
   render() {
-    const { user, chats } = this.props;
+    const { user, chats, activeChatId } = this.props;
 
     return (
       <MessengerView user={user} chats={chats}>
-        <Chat />
+        {
+          activeChatId && <Chat chatId={activeChatId} />
+        }
       </MessengerView>
     );
   }
@@ -37,6 +45,7 @@ class MessengerContainer extends PureComponent {
 const mapStateToProps = state => ({
   user: state.auth.user,
   chats: state.messenger.chats,
+  activeChatId: queryString.parse(state.router.location.search).chatId,
 });
 
 const mapDispatchToProps = {

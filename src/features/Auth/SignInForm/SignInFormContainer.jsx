@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { signIn } from '../actions';
 import Form from '../Form';
 
-class SignInPage extends PureComponent {
+class SignInFormContainer extends PureComponent {
   static propTypes = {
     handleSignIn: PropTypes.func.isRequired,
   }
@@ -26,4 +26,4 @@ const mapDispatchToProps = {
   handleSignIn: signIn,
 };
 
-export default connect(null, mapDispatchToProps)(SignInPage);
+export default connect(null, mapDispatchToProps)(SignInFormContainer);
