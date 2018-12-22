@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import MessengerView from './Component';
 import { userType, chatType } from './propTypes';
 import { fetchChats } from './actions';
+import Chat from '../Chat';
 // import authService from '../../utils/AuthService';
 
 class MessengerContainer extends PureComponent {
@@ -11,7 +12,6 @@ class MessengerContainer extends PureComponent {
     user: userType.isRequired,
     chats: PropTypes.arrayOf(chatType).isRequired,
     fetchChatsData: PropTypes.func.isRequired,
-    children: PropTypes.any.isRequired,
   }
 
   componentDidMount() {
@@ -24,11 +24,11 @@ class MessengerContainer extends PureComponent {
   }
 
   render() {
-    const { user, chats, children } = this.props;
+    const { user, chats } = this.props;
 
     return (
       <MessengerView user={user} chats={chats}>
-        {children}
+        <Chat />
       </MessengerView>
     );
   }
