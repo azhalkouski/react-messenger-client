@@ -11,6 +11,7 @@ class MessengerContainer extends PureComponent {
     user: userType.isRequired,
     chats: PropTypes.arrayOf(chatType).isRequired,
     fetchChatsData: PropTypes.func.isRequired,
+    children: PropTypes.any.isRequired,
   }
 
   componentDidMount() {
@@ -23,9 +24,13 @@ class MessengerContainer extends PureComponent {
   }
 
   render() {
-    const { user, chats } = this.props;
+    const { user, chats, children } = this.props;
 
-    return <MessengerView user={user} chats={chats} />;
+    return (
+      <MessengerView user={user} chats={chats}>
+        {children}
+      </MessengerView>
+    );
   }
 }
 
