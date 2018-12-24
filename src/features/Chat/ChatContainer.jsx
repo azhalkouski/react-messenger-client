@@ -6,13 +6,13 @@ import { fetchChatMessages as fetchMessages } from './actions';
 
 class ChatContainer extends React.Component {
   static propTypes = {
-    chatId: PropTypes.string.isRequired,
     fetchChatMessages: PropTypes.func.isRequired,
+    match: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
-    const { fetchChatMessages, chatId } = this.props;
-    fetchChatMessages(chatId);
+    const { fetchChatMessages, match } = this.props;
+    fetchChatMessages(match.params.chatId);
   }
 
   render() {

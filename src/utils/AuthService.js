@@ -1,3 +1,6 @@
+//* I think it should be deprecated
+//* just use Bearer token
+
 /* eslint class-methods-use-this: 0 */
 import Auth0Lock from 'auth0-lock';
 import history from './history';
