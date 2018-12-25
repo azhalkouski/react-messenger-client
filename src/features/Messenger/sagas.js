@@ -11,7 +11,8 @@ import {
 } from './actions';
 
 function* fetchChatsSaga() {
-  const chats = yield api.messenger.getChats();
+  const { chats, users } = yield api.messenger.getChats();
+  yield put(pushItems('users', users));
   yield put(pushItems('chats', chats));
   yield put(fetchChatsSuccess(chats));
 }

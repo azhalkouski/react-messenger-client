@@ -1,4 +1,5 @@
 const api = {
+
   messenger: {
     getChats: () => fetch('/api/v1/chats', {
       headers: {
@@ -7,6 +8,7 @@ const api = {
     })
       .then(response => response.json()),
   },
+
   chat: {
     getChatMessages: chatId => fetch(`/api/v1/chats/${chatId}/messages`, {
       headers: {
@@ -15,6 +17,7 @@ const api = {
     })
       .then(response => response.json()),
   },
+
 };
 
 api.initialize = (store) => {
