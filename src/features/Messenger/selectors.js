@@ -1,4 +1,13 @@
 /* eslint import/prefer-default-export: 0 */
-import { getItems } from '../../modules/data';
+import { getItem, getItems } from '../../modules/data';
 
-export const getChats = state => getItems(state, 'chats', state.messenger.chatIds);
+export const getChats = (state) => {
+  const chats = getItems(state, 'chats', state.messenger.chatIds);
+  const populatedChats = chats.map(chat => ({
+    ...chat,
+    users: getItems(state, 'users', chat.userIds),
+    lastMessage: getItem(state, 'messages', chat.lastMessageId),
+  }));
+
+  return populatedChats;
+};

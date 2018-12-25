@@ -8,6 +8,5 @@ export const userType = PropTypes.shape({
 export const chatType = PropTypes.shape({
   id: PropTypes.string.isRequired,
   users: PropTypes.arrayOf(userType),
-  lastMessage: PropTypes.string.isRequired,
-  lastMessageDate: PropTypes.string.isRequired,
+  lastMessage: PropTypes.object.isRequired,
 });
