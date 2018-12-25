@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import ChatForm from './ChatForm';
 
 export default function ChatView(props) {
-  const { messages, peer } = props;
+  const { messages, peer, onMessagePost } = props;
 
   return (
     <div className="messenger-page__chat">
@@ -30,10 +31,7 @@ export default function ChatView(props) {
           ))
         }
       </div>
-      <div className="chat__form">
-        <input className="form__text-input" type="text" placeholder="Write a message..." />
-        <button type="button" className="form__send-button" />
-      </div>
+      <ChatForm onSubmit={onMessagePost} />
     </div>
   );
 }
@@ -41,4 +39,5 @@ export default function ChatView(props) {
 ChatView.propTypes = {
   messages: PropTypes.array.isRequired,
   peer: PropTypes.object.isRequired,
+  onMessagePost: PropTypes.func.isRequired,
 };

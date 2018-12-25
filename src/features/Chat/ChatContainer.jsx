@@ -2,14 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ChatView from './ChatView';
-import { fetchChatMessages as fetchMessages } from './actions';
+import { fetchChatMessages, postChatMessage } from './actions';
 import { getChatMessages, getPeer } from './selectors';
 
 class ChatContainer extends React.Component {
   static propTypes = {
     messages: PropTypes.array,
     peer: PropTypes.object,
-    fetchChatMessages: PropTypes.func.isRequired,
+    fetchMessages: PropTypes.func.isRequired,
+    postMessage: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
   }
 
@@ -20,15 +21,25 @@ class ChatContainer extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchChatMessages, match } = this.props;
-    fetchChatMessages(match.params.chatId);
+    const { fetchMessages, match } = this.props;
+    fetchMessages(match.params.chatId);
+  }
+
+  handleMessagePost = (text) => {
+    const { postMessage, match } = this.props;
+
+    return postMessage({ chatId: match.params.chatId, text });
   }
 
   render() {
     const { messages, peer } = this.props;
 
     return (
-      <ChatView messages={messages} peer={peer} />
+      <ChatView
+        messages={messages}
+        peer={peer}
+        onMessagePost={this.handleMessagePost}
+      />
     );
   }
 }
@@ -39,7 +50,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = {
-  fetchChatMessages: fetchMessages,
+  fetchMessages: fetchChatMessages,
+  postMessage: postChatMessage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);
