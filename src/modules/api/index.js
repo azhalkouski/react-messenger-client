@@ -16,6 +16,15 @@ const api = {
       },
     })
       .then(response => response.json()),
+
+    postChatMessage: ({ chatId, text }) => fetch(`/api/v1/chats/${chatId}/messages`, {
+      method: 'POST',
+      body: JSON.stringify({ text }),
+      headers: {
+        Authorization: `Bearer ${api.store.getState().auth.user.token}`,
+        'Content-Type': 'application/json',
+      },
+    }),
   },
 
 };
