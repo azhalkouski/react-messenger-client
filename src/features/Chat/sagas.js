@@ -2,29 +2,20 @@ import {
   takeLatest,
   all,
   put,
-  select,
 } from 'redux-saga/effects';
+import api from '../../modules/api';
+import { pushItems } from '../../modules/data';
 import {
   FETCH_CHAT_MESSAGES,
   fetchChatMessagesSuccess,
-  fetchChatMessagesError,
 } from './actions';
 
 function* fetchChatMessagesSaga({ payload }) {
   const chatId = payload;
-  const user = yield select(state => state.auth.user);
+  const messages = yield api.chat.getChatMessages(chatId);
 
-  try {
-    const messages = yield fetch(`/api/v1/chats/${chatId}/messages`, {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    })
-      .then(response => response.json());
-    yield put(fetchChatMessagesSuccess(messages));
-  } catch (error) {
-    yield put(fetchChatMessagesError(error));
-  }
+  yield put(pushItems(messages));
+  yield put(fetchChatMessagesSuccess(messages));
 }
 
 export default function () {

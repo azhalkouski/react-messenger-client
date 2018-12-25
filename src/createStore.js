@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
-import { createLogger } from 'redux-logger';
 import { routerMiddleware } from 'connected-react-router';
 import createRootReducer from './rootReducer';
 import rootSaga from './rootSaga';
@@ -18,7 +17,6 @@ export default () => {
     persistedState,
     composeWithDevTools(
       applyMiddleware(
-        createLogger(),
         routerMiddleware(history),
         sagaMiddleware,
       ),

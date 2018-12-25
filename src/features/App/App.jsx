@@ -4,6 +4,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { hot } from 'react-hot-loader';
 import createStore from '../../createStore';
 import getRoutes from '../../getRoutes';
+import api from '../../modules/api';
 import './styles.css';
 
 const getMainColor = () =>
@@ -21,6 +22,8 @@ const theme = createMuiTheme({
 });
 
 const store = createStore();
+
+api.initialize(store);
 
 const App = () => (
   <MuiThemeProvider theme={theme}>

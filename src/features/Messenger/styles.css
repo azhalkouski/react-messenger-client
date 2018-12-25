@@ -70,6 +70,7 @@
 .user-chats__chats-list {}
 
 .chats-list__chat-item {
+  text-decoration: none;
   position: relative;
   display: flex;
   height: 72px;

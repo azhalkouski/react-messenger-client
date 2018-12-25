@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'react-router-dom/Link';
 import Logo from '../Logo';
 import { userType, chatType } from './propTypes';
 import './styles.css';
@@ -25,7 +26,7 @@ export default function MessengerView(props) {
           <div className="user-chats__chats-list">
 
             {chats.map(chat => (
-              <div className="chats-list__chat-item" key={chat.id}>
+              <Link to={`/messenger/:${chat._id}`} className="chats-list__chat-item" key={chat.id}>
                 <div className="chat-item__user">
                   <img className="user__image" src="https://randomuser.me/api/portraits/women/68.jpg" />
                   <div className="user__status" />
@@ -35,7 +36,7 @@ export default function MessengerView(props) {
                   <span className="message-preview__last-message">{chat.lastMessage || 'Empty...'}</span>
                 </div>
                 <span className="chat-item__last-message-date">{chat.lastMessageDate}</span>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
