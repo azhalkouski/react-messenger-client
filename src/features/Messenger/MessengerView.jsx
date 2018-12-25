@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Link from 'react-router-dom/Link';
 import Logo from '../Logo';
 import { userType, chatType } from './propTypes';
@@ -15,8 +16,8 @@ export default function MessengerView(props) {
           <Logo theme="light" />
         </div>
         <div className="sidebar__profile">
-          <img className="profile__image" src="https://randomuser.me/api/portraits/men/85.jpg" />
-          <span className="profile__name">{user.email}</span>
+          <img className="profile__image" src={user.photoUrl} />
+          <span className="profile__name">{user.fullName}</span>
           <span className="profile__email">{user.email}</span>
         </div>
         <div className="sidebar__user-chats">
@@ -28,14 +29,14 @@ export default function MessengerView(props) {
             {chats.map(chat => (
               <Link to={`/messenger/:${chat._id}`} className="chats-list__chat-item" key={chat.id}>
                 <div className="chat-item__user">
-                  <img className="user__image" src="https://randomuser.me/api/portraits/women/68.jpg" />
+                  <img className="user__image" src={chat.users.filter(peer => peer._id !== user._id)[0].photoUrl} />
                   <div className="user__status" />
                 </div>
                 <div className="chat-item__message-preview">
-                  <span className="message-preview__user">{chat.users.find(chatUser => chatUser.id !== user.id).email}</span>
-                  <span className="message-preview__last-message">{chat.lastMessage || 'Empty...'}</span>
+                  <span className="message-preview__user">{chat.users.find(chatUser => chatUser.id !== user.id).fullName}</span>
+                  <span className="message-preview__last-message">{chat.lastMessage ? chat.lastMessage.text : 'Empty...'}</span>
                 </div>
-                <span className="chat-item__last-message-date">{chat.lastMessageDate}</span>
+                <span className="chat-item__last-message-date">{chat.lastMessage ? moment(chat.lastMessage.created).format('h:mm A') : '-'}</span>
               </Link>
             ))}
           </div>
