@@ -5,6 +5,7 @@ import Route from 'react-router-dom/Route';
 import MessengerView from './MessengerView';
 import { userType, chatType } from './propTypes';
 import { fetchChats } from './actions';
+import { getChats } from './selectors';
 import Chat from '../Chat';
 
 class MessengerContainer extends PureComponent {
@@ -36,7 +37,7 @@ class MessengerContainer extends PureComponent {
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  chats: state.messenger.chats,
+  chats: getChats(state),
 });
 
 const mapDispatchToProps = {
