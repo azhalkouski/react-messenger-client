@@ -1,7 +1,13 @@
 import { getItem, getItems } from '../../modules/data';
 import { getCurrentUserId } from '../Auth/selectors';
 
-export const getChatMessages = (state) => {
+export const getChatMessages = (state, chatId) => {
+  const chatMeta = getItem(state, 'chatMetas', chatId);
+
+  if (!chatMeta) {
+    return [];
+  }
+
   const messages = getItems(state, 'messages', state.chat.messageIds);
   const populatedMessages = messages.map(message => ({
     ...message,

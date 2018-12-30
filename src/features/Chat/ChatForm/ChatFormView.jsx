@@ -11,6 +11,7 @@ export default function ChatFormView(props) {
     e.preventDefault();
 
     onSubmit(textInput.current.text.value);
+    textInput.current.text.value = '';
   }
 
   return (

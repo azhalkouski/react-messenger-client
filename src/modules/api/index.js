@@ -24,7 +24,8 @@ const api = {
         Authorization: `Bearer ${api.store.getState().auth.user.token}`,
         'Content-Type': 'application/json',
       },
-    }),
+    })
+      .then(response => response.json()),
   },
 
 };
