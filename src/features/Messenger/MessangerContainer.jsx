@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import createSocket from 'socket.io-client';
 import Route from 'react-router-dom/Route';
 import MessengerView from './MessengerView';
 import { userType, chatType } from './propTypes';
-import { fetchChats } from './actions';
+import { fetchChats as fetchChatsAction } from './actions';
+import { fetchChatMessages as fetchChatMessagesAction } from '../Chat/actions';
 import { getChats } from './selectors';
 import Chat from '../Chat';
 
@@ -12,16 +14,24 @@ class MessengerContainer extends PureComponent {
   static propTypes = {
     user: userType.isRequired,
     chats: PropTypes.arrayOf(chatType).isRequired,
-    fetchChatsData: PropTypes.func.isRequired,
+    fetchChats: PropTypes.func.isRequired,
+    fetchChatMessages: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    // if (!store.getState().auth.user.token) {
-    // TODO: redirect to signin
-    // }
-    const { fetchChatsData } = this.props;
+    const { user, fetchChats, fetchChatMessages } = this.props;
 
-    fetchChatsData();
+    if (!user.token) {
+    // TODO: redirect to signin
+    }
+
+    fetchChats();
+
+    const socket = createSocket('http://localhost:8080');
+    socket.on('connect', () => {
+      socket.emit('ws/listening', { userId: user._id });
+      socket.on('ws/new-message', ({ chatId }) => fetchChatMessages(chatId));
+    });
   }
 
   render() {
@@ -41,7 +51,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchChatsData: fetchChats,
+  fetchChats: fetchChatsAction,
+  fetchChatMessages: fetchChatMessagesAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessengerContainer);

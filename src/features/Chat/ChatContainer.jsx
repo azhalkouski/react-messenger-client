@@ -45,7 +45,7 @@ class ChatContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  messages: getChatMessages(state),
+  messages: getChatMessages(state, ownProps.match.params.chatId),
   peer: getPeer(state, ownProps.match.params.chatId),
 });
 
