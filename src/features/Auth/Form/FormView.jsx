@@ -37,6 +37,7 @@ export default function FormView(props) {
             />
             <TextField
               className="sign-up-page__input"
+              type="password"
               label="Password"
               value={password}
               onChange={withVal(onPasswordChange)}

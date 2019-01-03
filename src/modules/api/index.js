@@ -28,6 +28,18 @@ const api = {
       .then(response => response.json()),
   },
 
+  createChat: {
+    byEmail: ({ email }) => fetch('/api/v1/chatsByEmail', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+      headers: {
+        Authorization: `Bearer ${api.store.getState().auth.user.token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json()),
+  },
+
 };
 
 api.initialize = (store) => {
