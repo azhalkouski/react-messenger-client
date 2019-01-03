@@ -16,7 +16,7 @@ function* fetchChatsSaga() {
   yield put(pushItems('messages', messages));
   yield chats.map(chat => put(pushItem('chatMetas', {
     _id: chat._id,
-    messageIds: [chat.lastMessageId],
+    messageIds: chat.lastMessageId ? [chat.lastMessageId] : [],
   })));
   yield put(pushItems('chats', chats));
   yield put(fetchChatsSuccess(chats));

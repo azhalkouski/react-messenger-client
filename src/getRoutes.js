@@ -8,6 +8,7 @@ import history from './utils/history';
 import SignUpForm from './features/Auth/SignUpForm';
 import SignInForm from './features/Auth/SignInForm';
 import Messenger from './features/Messenger';
+import CreateChat from './features/CreateChat';
 
 export default function () {
   return (
@@ -23,6 +24,7 @@ export default function () {
           <Route path="/messenger" component={Messenger} />
           <Route path="/signup" component={SignUpForm} />
           <Route path="/signin" component={SignInForm} />
+          <Route path="/create-chat/:email" component={CreateChat} />
         </Switch>
       </div>
     </ConnectedRouter>
