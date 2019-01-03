@@ -8,20 +8,21 @@ class CreateChatContainer extends React.Component {
   static propTypes = {
     user: userType.isRequired,
     match: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
-    const { user, match } = this.props;
+    const { user, match, history } = this.props;
 
     if (!user.token) {
-      // TODO: redirect to signin
+      history.replace({ pathname: '/signin' });
+    } else {
+      api.createChat.byEmail({
+        _email: match.params.email,
+        email: 'test@localhost.com',
+      })
+        .then(chat => alert(`Created. Chat id: ${chat._id}`));
     }
-
-    api.createChat.byEmail({
-      _email: match.params.email,
-      email: 'test@localhost.com',
-    })
-      .then(chat => alert(`Created. Chat id: ${chat._id}`));
   }
 
   render() {

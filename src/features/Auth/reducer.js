@@ -4,7 +4,7 @@ import {
 } from './actions';
 
 const initialState = {
-  user: null,
+  user: {},
 };
 
 export default (state = initialState, action) => {
