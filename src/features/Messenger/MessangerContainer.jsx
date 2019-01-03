@@ -16,22 +16,28 @@ class MessengerContainer extends PureComponent {
     chats: PropTypes.arrayOf(chatType).isRequired,
     fetchChats: PropTypes.func.isRequired,
     fetchChatMessages: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
-    const { user, fetchChats, fetchChatMessages } = this.props;
+    const {
+      user,
+      fetchChats,
+      fetchChatMessages,
+      history,
+    } = this.props;
 
     if (!user.token) {
-    // TODO: redirect to signin
+      history.replace({ pathname: '/signin' });
+    } else {
+      fetchChats();
+
+      const socket = createSocket('http://localhost:8080');
+      socket.on('connect', () => {
+        socket.emit('ws/listening', { userId: user._id });
+        socket.on('ws/new-message', ({ chatId }) => fetchChatMessages(chatId));
+      });
     }
-
-    fetchChats();
-
-    const socket = createSocket('http://localhost:8080');
-    socket.on('connect', () => {
-      socket.emit('ws/listening', { userId: user._id });
-      socket.on('ws/new-message', ({ chatId }) => fetchChatMessages(chatId));
-    });
   }
 
   render() {

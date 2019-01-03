@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
 export const userType = PropTypes.shape({
-  _id: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  _id: PropTypes.string,
+  email: PropTypes.string,
 });
 
 export const chatType = PropTypes.shape({
