@@ -18,8 +18,7 @@ class CreateChatContainer extends React.Component {
       history.replace({ pathname: '/signin' });
     } else {
       api.createChat.byEmail({
-        _email: match.params.email,
-        email: 'test@localhost.com',
+        email: match.params.email,
       })
         .then(chat => alert(`Created. Chat id: ${chat._id}`));
     }

@@ -3,7 +3,7 @@ import { getItem, getItems } from '../../modules/data';
 
 const getLastMessageId = (state, chatId) => {
   const chatMessageIds = getItem(state, 'chatMetas', chatId).messageIds;
-  return chatMessageIds.pop();
+  return chatMessageIds[chatMessageIds.length - 1];
 };
 
 export const getChats = (state) => {
