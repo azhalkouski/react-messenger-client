@@ -10,8 +10,8 @@ export default function ChatFormView(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    onSubmit(textInput.current.text.value);
-    textInput.current.text.value = '';
+    onSubmit(textInput.current.value);
+    textInput.current.value = '';
   }
 
   return (
