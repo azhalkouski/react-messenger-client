@@ -182,16 +182,21 @@
   margin-right: 4px;
 }
 
+.chat-messages-wrapper {
+  flex: 1;
+  overflow-y: scroll;
+}
+
 .chat-messages {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   flex: 1;
   padding-bottom: 24px;
 }
 
 .chat-messages__message {
   display: flex;
-  position: relative
+  position: relative;
 }
 
 .chat-messages__message:hover {
