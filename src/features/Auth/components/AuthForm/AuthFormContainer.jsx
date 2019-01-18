@@ -1,12 +1,21 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import FormView from './FormView';
+import AuthFormView from './AuthFormView';
+
+const withVal = fn => e => fn(e.target.value);
 
 class FormContainer extends PureComponent {
   static propTypes = {
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    description: PropTypes.string,
     onSubmit: PropTypes.func.isRequired,
+    validate: PropTypes.func.isRequired,
+    submitButtonText: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    title: '',
+    description: '',
   }
 
   state = {
@@ -31,16 +40,23 @@ class FormContainer extends PureComponent {
 
   render() {
     const { email, password } = this.state;
-    const { title, description } = this.props;
+    const {
+      title,
+      description,
+      submitButtonText,
+      validate,
+    } = this.props;
 
     return (
-      <FormView
+      <AuthFormView
         title={title}
         description={description}
+        isValid={validate(email, password)}
         email={email}
         password={password}
-        onEmailChange={this.handleEmailChange}
-        onPasswordChange={this.handlePasswordChange}
+        onEmailChange={withVal(this.handleEmailChange)}
+        onPasswordChange={withVal(this.handlePasswordChange)}
+        submitButtonText={submitButtonText}
         onSubmit={this.handleSubmit}
       />
     );

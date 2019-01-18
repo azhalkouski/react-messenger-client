@@ -75,6 +75,10 @@
     "webpack-dev-server": "^3.1.10"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./config/enzyme.setup.js"
+    "setupTestFrameworkScriptFile": "./config/enzyme.setup.js",
+    "moduleNameMapper":{
+      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   }
 }
