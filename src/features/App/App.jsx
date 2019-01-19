@@ -15,6 +15,9 @@ const theme = createMuiTheme({
     primary: {
       main: getMainColor(),
     },
+    accent1Color: {
+      main: 'rgba(0,0,0,.87)',
+    },
   },
   typography: {
     useNextVariants: true,

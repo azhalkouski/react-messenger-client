@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import AuthFormView from './AuthFormView';
-
-const withVal = fn => e => fn(e.target.value);
+import withVal from '../../utils/withVal';
 
 class FormContainer extends PureComponent {
   static propTypes = {
-    title: PropTypes.string,
     description: PropTypes.string,
     onSubmit: PropTypes.func.isRequired,
     validate: PropTypes.func.isRequired,
@@ -14,7 +12,6 @@ class FormContainer extends PureComponent {
   }
 
   static defaultProps = {
-    title: '',
     description: '',
   }
 
@@ -33,23 +30,26 @@ class FormContainer extends PureComponent {
 
   handleSubmit = () => {
     const { email, password } = this.state;
-    const { onSubmit } = this.props;
+    const { validate, onSubmit } = this.props;
 
-    onSubmit(email, password);
+    if (validate(email, password)) {
+      onSubmit(email, password);
+    }
+  }
+
+  handleKeyPress = (e) => {
+    if (e.which && e.which === 13) {
+      e.preventDefault();
+      this.handleSubmit();
+    }
   }
 
   render() {
     const { email, password } = this.state;
-    const {
-      title,
-      description,
-      submitButtonText,
-      validate,
-    } = this.props;
+    const { description, submitButtonText, validate } = this.props;
 
     return (
       <AuthFormView
-        title={title}
         description={description}
         isValid={validate(email, password)}
         email={email}
@@ -58,6 +58,7 @@ class FormContainer extends PureComponent {
         onPasswordChange={withVal(this.handlePasswordChange)}
         submitButtonText={submitButtonText}
         onSubmit={this.handleSubmit}
+        onKeyPress={this.handleKeyPress}
       />
     );
   }
