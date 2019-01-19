@@ -7,7 +7,6 @@ import './styles.css';
 
 export default function AuthFormView(props) {
   const {
-    title,
     description,
     isValid,
     email,
@@ -16,11 +15,11 @@ export default function AuthFormView(props) {
     onPasswordChange,
     submitButtonText,
     onSubmit,
+    onKeyPress,
   } = props;
 
   return (
     <div className="auth-form">
-      <h1 className="title">{title}</h1>
       <p className="description">{description}</p>
       <div className="auth-form__inputs">
         <TextField
@@ -28,6 +27,7 @@ export default function AuthFormView(props) {
           label="Email"
           value={email}
           onChange={onEmailChange}
+          onKeyPress={onKeyPress}
         />
         <TextField
           data-auth-form-text-field="password"
@@ -36,6 +36,7 @@ export default function AuthFormView(props) {
           label="Password"
           value={password}
           onChange={onPasswordChange}
+          onKeyPress={onKeyPress}
         />
       </div>
       <div className="auth-form__buttons">
@@ -48,7 +49,6 @@ export default function AuthFormView(props) {
 }
 
 AuthFormView.propTypes = {
-  title: PropTypes.string,
   description: PropTypes.string,
   isValid: PropTypes.bool.isRequired,
   email: PropTypes.string.isRequired,
@@ -57,9 +57,9 @@ AuthFormView.propTypes = {
   onEmailChange: PropTypes.func.isRequired,
   onPasswordChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
 };
 
 AuthFormView.defaultProps = {
-  title: '',
   description: '',
 };

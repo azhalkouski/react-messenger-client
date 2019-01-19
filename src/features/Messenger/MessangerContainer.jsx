@@ -28,7 +28,7 @@ class MessengerContainer extends PureComponent {
     } = this.props;
 
     if (!user.token) {
-      history.replace({ pathname: '/signin' });
+      history.replace({ pathname: '/auth' });
     } else {
       fetchChats();
 

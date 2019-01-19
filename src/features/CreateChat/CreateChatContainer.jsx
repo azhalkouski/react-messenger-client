@@ -15,7 +15,7 @@ class CreateChatContainer extends React.Component {
     const { user, match, history } = this.props;
 
     if (!user.token) {
-      history.replace({ pathname: '/signin' });
+      history.replace({ pathname: '/auth' });
     } else {
       api.createChat.byEmail({
         email: match.params.email,
