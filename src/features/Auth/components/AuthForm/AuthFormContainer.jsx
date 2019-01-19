@@ -9,6 +9,10 @@ class FormContainer extends PureComponent {
     onSubmit: PropTypes.func.isRequired,
     validate: PropTypes.func.isRequired,
     submitButtonText: PropTypes.string.isRequired,
+    error: PropTypes.shape({
+      email: PropTypes.string,
+      password: PropTypes.string,
+    }).isRequired,
   }
 
   static defaultProps = {
@@ -46,7 +50,12 @@ class FormContainer extends PureComponent {
 
   render() {
     const { email, password } = this.state;
-    const { description, submitButtonText, validate } = this.props;
+    const {
+      description,
+      submitButtonText,
+      validate,
+      error,
+    } = this.props;
 
     return (
       <AuthFormView
@@ -54,6 +63,7 @@ class FormContainer extends PureComponent {
         isValid={validate(email, password)}
         email={email}
         password={password}
+        error={error}
         onEmailChange={withVal(this.handleEmailChange)}
         onPasswordChange={withVal(this.handlePasswordChange)}
         submitButtonText={submitButtonText}

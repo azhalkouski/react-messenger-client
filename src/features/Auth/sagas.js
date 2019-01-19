@@ -19,8 +19,8 @@ function* signUpSaga({ payload }) {
     const user = yield api.auth.createUser(payload.email, payload.password);
     yield put(signUpSuccess(user));
     yield put(push('/'));
-  } catch (e) {
-    yield put(signUpError(e));
+  } catch (err) {
+    yield put(signUpError(err));
   }
 }
 
@@ -31,8 +31,8 @@ function* signInSaga({ payload }) {
     const user = yield api.auth.signIn(payload.email, payload.password);
     yield put(signInSuccess(user));
     yield put(push('/'));
-  } catch (e) {
-    yield put(signInError(e));
+  } catch (err) {
+    yield put(signInError(err));
   }
 }
 

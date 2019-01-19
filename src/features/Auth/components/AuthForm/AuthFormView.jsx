@@ -16,6 +16,7 @@ export default function AuthFormView(props) {
     submitButtonText,
     onSubmit,
     onKeyPress,
+    error,
   } = props;
 
   return (
@@ -24,6 +25,7 @@ export default function AuthFormView(props) {
       <div className="auth-form__inputs">
         <TextField
           data-auth-form-text-field="email"
+          error={!!error.email}
           label="Email"
           value={email}
           onChange={onEmailChange}
@@ -31,6 +33,7 @@ export default function AuthFormView(props) {
         />
         <TextField
           data-auth-form-text-field="password"
+          error={!!error.password}
           margin="dense"
           type="password"
           label="Password"
@@ -58,6 +61,10 @@ AuthFormView.propTypes = {
   onPasswordChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onKeyPress: PropTypes.func.isRequired,
+  error: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+  }).isRequired,
 };
 
 AuthFormView.defaultProps = {
