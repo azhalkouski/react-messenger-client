@@ -7,6 +7,7 @@ describe('AuthFormContainer', () => {
     onSubmit: () => Promise.resolve(false),
     submitButtonText: '',
     validate: () => false,
+    error: {},
   };
 
   let wrapper;

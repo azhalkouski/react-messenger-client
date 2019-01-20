@@ -62,10 +62,10 @@ AuthFormView.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onKeyPress: PropTypes.func.isRequired,
   error: PropTypes.shape({
-    message: {
+    message: PropTypes.shape({
       email: PropTypes.string,
       password: PropTypes.string,
-    },
+    }),
   }).isRequired,
 };
 

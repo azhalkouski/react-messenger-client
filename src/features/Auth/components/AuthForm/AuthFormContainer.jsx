@@ -10,10 +10,10 @@ class FormContainer extends PureComponent {
     validate: PropTypes.func.isRequired,
     submitButtonText: PropTypes.string.isRequired,
     error: PropTypes.shape({
-      message: {
+      message: PropTypes.shape({
         email: PropTypes.string,
         password: PropTypes.string,
-      },
+      }),
     }).isRequired,
   }
 
