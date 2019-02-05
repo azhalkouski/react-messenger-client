@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import ChatMessages from './components/Messages';
 import ChatForm from './ChatForm';
+import './styles.css';
 
 class ChatView extends Component {
   static propTypes = {
@@ -26,7 +27,7 @@ class ChatView extends Component {
     const { messages, peer, onMessagePost } = this.props;
 
     return (
-      <div className="messenger-page__chat">
+      <div className="chat">
         <div className="chat__header">
           <div className="header__info">
             <img className="info__photo" src={peer.photoUrl} />
