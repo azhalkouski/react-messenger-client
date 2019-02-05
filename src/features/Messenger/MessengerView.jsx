@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import TimeAgo from 'react-timeago';
 import Link from 'react-router-dom/Link';
 import Logo from '../Logo';
 import { userType, chatType } from './propTypes';
@@ -46,7 +46,7 @@ export default function MessengerView(props) {
                 {
                   chat.lastMessage && (
                     <span className="chat-item__last-message-date">
-                      {moment(chat.lastMessage.created).format('h:mm A')}
+                      <TimeAgo date={chat.lastMessage.created} />
                     </span>
                   )
                 }
