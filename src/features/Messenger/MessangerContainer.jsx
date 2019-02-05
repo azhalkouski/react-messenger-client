@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import createSocket from 'socket.io-client';
 import Route from 'react-router-dom/Route';
+import Switch from 'react-router-dom/Switch';
 import MessengerView from './MessengerView';
 import { userType, chatType } from './propTypes';
 import { fetchChats as fetchChatsAction } from './actions';
@@ -45,7 +46,17 @@ class MessengerContainer extends PureComponent {
 
     return (
       <MessengerView user={user} chats={chats}>
-        <Route path="/messenger/:chatId" component={Chat} />
+        <Switch>
+          <Route path="/messenger/:chatId" component={Chat} />
+          <Route
+            path="/messenger"
+            render={() => (
+              <div className="messenger-page__chat--not-selected">
+                Select a chat
+              </div>
+            )}
+          />
+        </Switch>
       </MessengerView>
     );
   }
