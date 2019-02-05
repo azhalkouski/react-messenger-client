@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TimeAgo from 'react-timeago';
+import enStrings from 'react-timeago/lib/language-strings/en';
+import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import Link from 'react-router-dom/Link';
 import Logo from '../Logo';
 import { userType, chatType } from './propTypes';
@@ -46,7 +48,10 @@ export default function MessengerView(props) {
                 {
                   chat.lastMessage && (
                     <span className="chat-item__last-message-date">
-                      <TimeAgo date={chat.lastMessage.created} />
+                      <TimeAgo
+                        date={chat.lastMessage.created}
+                        formatter={buildFormatter(enStrings)}
+                      />
                     </span>
                   )
                 }

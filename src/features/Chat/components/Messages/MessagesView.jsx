@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import './styles.css';
 
 export default function MessagesView(props) {
   const { messages } = props;
