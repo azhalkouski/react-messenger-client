@@ -8,7 +8,7 @@ export const getChatMessages = (state, chatId) => {
     return [];
   }
 
-  const messages = getItems(state, 'messages', state.chat.messageIds);
+  const messages = getItems(state, 'messages', chatMeta.messageIds);
   const populatedMessages = messages.map(message => ({
     ...message,
     user: getItem(state, 'users', message.userId),

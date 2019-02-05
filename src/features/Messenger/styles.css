@@ -134,6 +134,13 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.messenger-page__chat--not-selected {
+  display: flex;
+  justify-content: center;
+  color: rgba(0,0,0,.56);
 }
 
 .chat__header {
@@ -185,6 +192,13 @@
 .chat-messages-wrapper {
   flex: 1;
   overflow-y: scroll;
+}
+
+.chat-messages-wrapper--no-messages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0,0,0,.56);
 }
 
 .chat-messages {

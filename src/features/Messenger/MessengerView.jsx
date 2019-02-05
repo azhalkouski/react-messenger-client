@@ -29,14 +29,27 @@ export default function MessengerView(props) {
             {chats.map(chat => (
               <Link to={`/messenger/${chat._id}`} className="chats-list__chat-item" key={chat._id}>
                 <div className="chat-item__user">
-                  <img className="user__image" src={chat.users.filter(peer => peer._id !== user._id)[0].photoUrl} />
+                  <img
+                    className="user__image"
+                    src={chat.users.filter(peer => peer._id !== user._id)[0].photoUrl}
+                  />
                   <div className="user__status" />
                 </div>
                 <div className="chat-item__message-preview">
-                  <span className="message-preview__user">{chat.users.find(chatUser => chatUser._id !== user._id).fullName}</span>
-                  <span className="message-preview__last-message">{chat.lastMessage ? chat.lastMessage.text : 'No messages yet.'}</span>
+                  <span className="message-preview__user">
+                    {chat.users.find(chatUser => chatUser._id !== user._id).fullName}
+                  </span>
+                  <span className="message-preview__last-message">
+                    {chat.lastMessage ? chat.lastMessage.text : 'No messages yet.'}
+                  </span>
                 </div>
-                <span className="chat-item__last-message-date">{chat.lastMessage ? moment(chat.lastMessage.created).format('h:mm A') : ''}</span>
+                {
+                  chat.lastMessage && (
+                    <span className="chat-item__last-message-date">
+                      {moment(chat.lastMessage.created).format('h:mm A')}
+                    </span>
+                  )
+                }
               </Link>
             ))}
           </div>

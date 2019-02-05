@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import ChatMessages from './components/Messages';
 import ChatForm from './ChatForm';
 
-class ChatView extends PureComponent {
+class ChatView extends Component {
   static propTypes = {
     messages: PropTypes.array.isRequired,
     peer: PropTypes.object.isRequired,
@@ -33,8 +34,18 @@ class ChatView extends PureComponent {
             <span className="info__status">{peer.status === 'online' ? 'Online' : 'Offline'}</span>
           </div>
         </div>
-        <div className="chat-messages-wrapper" ref={this.messagesRef}>
-          <ChatMessages messages={messages} />
+        <div
+          className={cn({
+            'chat-messages-wrapper': true,
+            'chat-messages-wrapper--no-messages': messages.length === 0,
+          })}
+          ref={this.messagesRef}
+        >
+          {
+            messages.length > 0
+              ? <ChatMessages messages={messages} />
+              : 'No messages yet'
+          }
         </div>
         <ChatForm onSubmit={onMessagePost} />
       </div>
