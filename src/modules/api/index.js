@@ -71,6 +71,14 @@ const api = {
     }),
   },
 
+  users: {
+    getUsers: () => fetchWithHandler('/api/v1/users', {
+      headers: {
+        Authorization: `Bearer ${api.store.getState().auth.user.token}`,
+      },
+    }),
+  },
+
 };
 
 api.initialize = (store) => {
