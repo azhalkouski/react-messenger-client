@@ -1,3 +1,10 @@
+.create-chat {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+}
+
 .create-chat__user {
   height: 72px;
   padding: 8px;
