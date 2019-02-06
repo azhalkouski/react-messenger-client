@@ -4,6 +4,7 @@ import { dataReducer } from './modules/data';
 import auth from './features/Auth/reducer';
 import messenger from './features/Messenger/reducer';
 import chat from './features/Chat/reducer';
+import createChat from './features/CreateChat/reducer';
 
 export default history => combineReducers({
   router: connectRouter(history),
@@ -11,4 +12,5 @@ export default history => combineReducers({
   auth,
   messenger,
   chat,
+  createChat,
 });

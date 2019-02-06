@@ -10,6 +10,7 @@ import { fetchChats as fetchChatsAction } from './actions';
 import { fetchChatMessages as fetchChatMessagesAction } from '../Chat/actions';
 import { getChats } from './selectors';
 import Chat from '../Chat';
+import CreateChat from '../CreateChat';
 import sortChatsByDate from './utils/sortChatsByDate';
 
 class MessengerContainer extends PureComponent {
@@ -48,6 +49,7 @@ class MessengerContainer extends PureComponent {
     return (
       <MessengerView user={user} chats={sortChatsByDate(chats)}>
         <Switch>
+          <Route path="/messenger/new" component={CreateChat} />
           <Route path="/messenger/:chatId" component={Chat} />
           <Route
             path="/messenger"
