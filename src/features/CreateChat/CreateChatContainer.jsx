@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { authUserType, userType } from './propTypes';
 import CreateChatView from './CreateChatView';
-import { fetchUsers } from './actions';
+import { fetchUsers, createChat } from './actions';
 import { getUsers } from './selectors';
+import filterPeers from './utils/filterPeers';
 
 class CreateChatContainer extends React.Component {
   static propTypes = {
     user: authUserType.isRequired,
-    users: PropTypes.arrayOf(userType).isRequired,
+    users: PropTypes.arrayOf(userType),
     handleFetchUsers: PropTypes.func.isRequired,
+    handleCreateChat: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
+  }
+
+  static defaultProps = {
+    users: [],
   }
 
   componentDidMount() {
@@ -25,9 +31,10 @@ class CreateChatContainer extends React.Component {
   }
 
   render() {
-    const { users } = this.props;
+    const { user, users, handleCreateChat } = this.props;
+
     return (
-      <CreateChatView users={users} />
+      <CreateChatView users={filterPeers(user._id, users)} onCreateChat={handleCreateChat} />
     );
   }
 }
@@ -39,6 +46,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   handleFetchUsers: fetchUsers,
+  handleCreateChat: createChat,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateChatContainer);

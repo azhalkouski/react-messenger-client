@@ -1,7 +1,14 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, all, put } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 import api from '../../modules/api';
 import { pushItems } from '../../modules/data';
-import { FETCH_USERS, fetchUsersSuccess, fetchUsersError } from './actions';
+import {
+  FETCH_USERS,
+  fetchUsersSuccess,
+  fetchUsersError,
+  CREATE_CHAT,
+} from './actions';
+import { fetchChats } from '../Messenger/actions';
 
 function* fetchUsersSaga() {
   try {
@@ -13,6 +20,15 @@ function* fetchUsersSaga() {
   }
 }
 
-export default function* () {
-  yield takeLatest(FETCH_USERS, fetchUsersSaga);
+function* createChatSaga({ payload }) {
+  yield api.createChat.byPeerId({ peerId: payload });
+  yield put(fetchChats());
+  yield put(push('/messenger'));
+}
+
+export default function () {
+  return all([
+    takeLatest(FETCH_USERS, fetchUsersSaga),
+    takeLatest(CREATE_CHAT, createChatSaga),
+  ]);
 }

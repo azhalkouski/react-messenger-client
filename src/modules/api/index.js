@@ -61,6 +61,15 @@ const api = {
   },
 
   createChat: {
+    byPeerId: ({ peerId }) => fetchWithHandler('/api/v1/chats', {
+      method: 'POST',
+      body: JSON.stringify({ peerId }),
+      headers: {
+        Authorization: `Bearer ${api.store.getState().auth.user.token}`,
+        'Content-Type': 'application/json',
+      },
+    }),
+
     byEmail: ({ email }) => fetchWithHandler('/api/v1/chatsByEmail', {
       method: 'POST',
       body: JSON.stringify({ email }),
