@@ -5,7 +5,7 @@ import { userType } from './propTypes';
 import './styles.css';
 
 export default function CreateChatView(props) {
-  const { users } = props;
+  const { users, onCreateChat } = props;
 
   return (
     <div className="create-chat">
@@ -16,7 +16,7 @@ export default function CreateChatView(props) {
             <span className="create-chat__user-name">{user.fullName}</span>
             <span className="create-chat__user-email">{user.email}</span>
           </div>
-          <Button className="create-chat__button" variant="text" onClick={() => {}}>
+          <Button className="create-chat__button" variant="text" onClick={() => onCreateChat(user._id)}>
             Create chat
           </Button>
         </div>
@@ -27,4 +27,5 @@ export default function CreateChatView(props) {
 
 CreateChatView.propTypes = {
   users: PropTypes.arrayOf(userType).isRequired,
+  onCreateChat: PropTypes.func.isRequired,
 };

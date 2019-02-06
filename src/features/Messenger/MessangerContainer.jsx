@@ -39,6 +39,7 @@ class MessengerContainer extends PureComponent {
       socket.on('connect', () => {
         socket.emit('ws/listening', { userId: user._id });
         socket.on('ws/new-message', ({ chatId }) => fetchChatMessages(chatId));
+        socket.on('ws/new-chat', () => fetchChats());
       });
     }
   }
