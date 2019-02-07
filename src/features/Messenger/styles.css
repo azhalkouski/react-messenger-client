@@ -51,20 +51,39 @@
   background: var(--main-color);
 }
 
-.user-chats__search {
+.user-chats__actions {
   padding: 16px 8px;
   width: 100%;
+  display: flex;
+  opacity: 0.6;
 }
 
-.user-chats__search-input {
-  width: 100%;
-  font-size: 14px;
-  padding: 8px;
-  color: rgba(255,255,255,0.56);
+.user-chats__actions-search {
+  width: calc(100% - 40px);
+  font-size: 15px;
+  padding: 6px;
+  color: rgba(255,255,255,1);
   letter-spacing: 0.5px;
-  border: 1px solid rgba(255,255,255,0.56);
+  border: 1px solid rgba(255,255,255,1);
   border-radius: 2px;
   background: none;
+}
+
+.user-chats__actions-create-chat {
+  margin-left: 8px;
+  width: 32px;
+  height: 32px;
+  background: url('./img/create.svg') no-repeat center;
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: .3s;
+}
+
+.user-chats__actions-create-chat:hover {
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,1);
 }
 
 .user-chats__chats-list {}
