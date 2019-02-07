@@ -7,25 +7,10 @@ import moment from 'moment';
 const sortChatsByDate = chats =>
   chats
     .sort((a, b) => {
-      let result;
+      const dateA = a.lastMessage ? a.lastMessage.created : a.lastActive;
+      const dateB = b.lastMessage ? b.lastMessage.created : b.lastActive;
 
-      if (a.lastMessage && b.lastMessage) {
-        result = moment(b.lastMessage.created).valueOf() - moment(a.lastMessage.created).valueOf();
-      }
-
-      if (!a.lastMessage && b.lastMessage) {
-        result = moment(b.lastMessage.created).valueOf() - moment(a.lastActive).valueOf();
-      }
-
-      if (a.lastMessage && !b.lastMessage) {
-        result = moment(b.lastActive).valueOf() - moment(a.lastMessage.created).valueOf();
-      }
-
-      if (!a.lastMessage && !b.lastMessage) {
-        result = moment(b.lastActive).valueOf() - moment(a.lastActive).valueOf();
-      }
-
-      return result;
+      return moment(dateB).valueOf() - moment(dateA).valueOf();
     });
 
 export default sortChatsByDate;
