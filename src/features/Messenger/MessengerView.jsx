@@ -23,8 +23,9 @@ export default function MessengerView(props) {
           <span className="profile__email">{user.email}</span>
         </div>
         <div className="sidebar__user-chats">
-          <div className="user-chats__search">
-            <input className="user-chats__search-input" type="text" placeholder="Search..." />
+          <div className="user-chats__actions">
+            <input className="user-chats__actions-search" type="text" placeholder="Search..." />
+            <Link to="/messenger/new" className="user-chats__actions-create-chat" />
           </div>
           <div className="user-chats__chats-list">
 
