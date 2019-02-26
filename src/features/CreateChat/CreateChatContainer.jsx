@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { authUserType, userType } from './propTypes';
@@ -6,38 +6,40 @@ import CreateChatView from './CreateChatView';
 import { fetchUsers, createChat } from './actions';
 import { getUsers } from './selectors';
 import filterPeers from './utils/filterPeers';
+import { useAuthTokenCheck } from '../../hooks';
 
-class CreateChatContainer extends React.Component {
-  static propTypes = {
-    user: authUserType.isRequired,
-    users: PropTypes.arrayOf(userType),
-    handleFetchUsers: PropTypes.func.isRequired,
-    handleCreateChat: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
-  }
+function CreateChatContainer(props) {
+  const {
+    user,
+    users,
+    history,
+    handleFetchUsers,
+    handleCreateChat,
+  } = props;
 
-  static defaultProps = {
-    users: [],
-  }
+  useAuthTokenCheck(user, history);
 
-  componentDidMount() {
-    const { user, handleFetchUsers, history } = this.props;
-
-    if (!user.token) {
-      history.replace({ pathname: '/auth' });
-    }
-
+  useEffect(() => {
     handleFetchUsers();
-  }
+  }, []);
 
-  render() {
-    const { user, users, handleCreateChat } = this.props;
-
-    return (
-      <CreateChatView users={filterPeers(user._id, users)} onCreateChat={handleCreateChat} />
-    );
-  }
+  return (
+    <CreateChatView users={filterPeers(user._id, users)} onCreateChat={handleCreateChat} />
+  );
 }
+
+CreateChatContainer.propTypes = {
+  user: authUserType.isRequired,
+  users: PropTypes.arrayOf(userType),
+  handleFetchUsers: PropTypes.func.isRequired,
+  handleCreateChat: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+};
+
+CreateChatContainer.defaultProps = {
+  users: [],
+};
+
 
 const mapStateToProps = state => ({
   user: state.auth.user,
