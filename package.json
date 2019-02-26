@@ -29,8 +29,8 @@
     "history": "^4.7.2",
     "lodash": "^4.17.11",
     "moment": "^2.23.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-swipeable-views": "^0.13.0",
@@ -46,7 +46,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.4",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
@@ -62,7 +62,7 @@
     "eslint-plugin-react": "^7.11.1",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "mini-css-extract-plugin": "^0.4.5",
     "postcss-bem-linter": "^3.1.0",
     "postcss-import": "^12.0.1",
@@ -78,7 +78,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./config/enzyme.setup.js",
+    "setupFilesAfterEnv": [ "./config/enzyme.setup.js" ],
     "moduleNameMapper": {
       "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
       "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
