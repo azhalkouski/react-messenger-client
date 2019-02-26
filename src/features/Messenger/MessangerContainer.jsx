@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import createSocket from 'socket.io-client';
@@ -12,59 +12,62 @@ import { getChats } from './selectors';
 import Chat from '../Chat';
 import CreateChat from '../CreateChat';
 import sortChatsByDate from './utils/sortChatsByDate';
+import { useAuthTokenCheck } from '../../hooks';
 
-class MessengerContainer extends PureComponent {
-  static propTypes = {
-    user: userType.isRequired,
-    chats: PropTypes.arrayOf(chatType).isRequired,
-    fetchChats: PropTypes.func.isRequired,
-    fetchChatMessages: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
-  }
+function MessengerContainer(props) {
+  const {
+    user,
+    chats,
+    fetchChats,
+    fetchChatMessages,
+    history,
+  } = props;
 
-  componentDidMount() {
-    const {
-      user,
-      fetchChats,
-      fetchChatMessages,
-      history,
-    } = this.props;
+  useAuthTokenCheck(user, history);
 
-    if (!user.token) {
-      history.replace({ pathname: '/auth' });
-    } else {
-      fetchChats();
+  useEffect(() => {
+    fetchChats();
+  }, []);
 
-      const socket = createSocket('http://localhost:8080');
-      socket.on('connect', () => {
-        socket.emit('ws/listening', { userId: user._id });
-        socket.on('ws/new-message', ({ chatId }) => fetchChatMessages(chatId));
-        socket.on('ws/new-chat', () => fetchChats());
-      });
-    }
-  }
+  useEffect(() => {
+    const socket = createSocket('http://localhost:8080');
+    socket.on('connect', () => {
+      socket.emit('ws/listening', { userId: user._id });
+      socket.on('ws/new-message', ({ chatId }) => fetchChatMessages(chatId));
+      socket.on('ws/new-chat', () => fetchChats());
+    });
 
-  render() {
-    const { user, chats } = this.props;
+    return () => {
+      socket.disconnect();
+    };
+  }, [user._id]);
 
-    return (
-      <MessengerView user={user} chats={sortChatsByDate(chats)}>
-        <Switch>
-          <Route path="/messenger/new" component={CreateChat} />
-          <Route path="/messenger/:chatId" component={Chat} />
-          <Route
-            path="/messenger"
-            render={() => (
-              <div className="messenger-page__chat--not-selected">
-                Select a chat
-              </div>
-            )}
-          />
-        </Switch>
-      </MessengerView>
-    );
-  }
+  return (
+    <MessengerView user={user} chats={sortChatsByDate(chats)}>
+      <Switch>
+        <Route path="/messenger/new" component={CreateChat} />
+        <Route path="/messenger/:chatId" component={Chat} />
+        <Route
+          path="/messenger"
+          render={() => (
+            <div className="messenger-page__chat--not-selected">
+              Select a chat
+            </div>
+          )}
+        />
+      </Switch>
+    </MessengerView>
+  );
 }
+
+MessengerContainer.propTypes = {
+  user: userType.isRequired,
+  chats: PropTypes.arrayOf(chatType).isRequired,
+  fetchChats: PropTypes.func.isRequired,
+  fetchChatMessages: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+};
+
 
 const mapStateToProps = state => ({
   user: state.auth.user,
