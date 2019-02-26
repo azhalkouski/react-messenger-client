@@ -5,7 +5,7 @@
       "browser": true,
       "jest": true
     },
-    "plugins": ["jest"],
+    "plugins": ["jest", "react-hooks"],
     "rules": {
       "jsx-a11y/no-static-element-interactions": 0,
       "jsx-a11y/alt-text": 0,
@@ -25,6 +25,8 @@
       "quote-props": 0,
       "no-underscore-dangle": 0,
       "react/no-find-dom-node": 0,
-      "no-confusing-arrow": 0
+      "no-confusing-arrow": 0,
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
     }
   }
