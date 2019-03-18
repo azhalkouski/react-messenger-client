@@ -11,15 +11,19 @@ import {
 } from './actions';
 
 function* fetchChatsSaga() {
-  const { chats, users, messages } = yield api.messenger.getChats();
-  yield put(pushItems('users', users));
-  yield put(pushItems('messages', messages));
-  yield chats.map(chat => put(pushItem('chatMetas', {
-    _id: chat._id,
-    messageIds: chat.lastMessageId ? [chat.lastMessageId] : [],
-  })));
-  yield put(pushItems('chats', chats));
-  yield put(fetchChatsSuccess(chats));
+  try {
+    const { chats, users, messages } = yield api.messenger.getChats();
+    yield put(pushItems('users', users));
+    yield put(pushItems('messages', messages));
+    yield chats.map(chat => put(pushItem('chatMetas', {
+      _id: chat._id,
+      messageIds: chat.lastMessageId ? [chat.lastMessageId] : [],
+    })));
+    yield put(pushItems('chats', chats));
+    yield put(fetchChatsSuccess(chats));
+  } catch (error) {
+    console.log('FETCH_CHATS::fetchChatsSaga::error', error);
+  }
 }
 
 export default function () {
